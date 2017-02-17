@@ -1,4 +1,4 @@
-# conferencemanager
+# contoso
 This application was generated using JHipster 4.0.3, you can find documentation and help at [https://jhipster.github.io/documentation-archive/v4.0.3](https://jhipster.github.io/documentation-archive/v4.0.3).
 
 This is a "microservice" application intended to be part of a microservice architecture, please refer to the [Doing microservices with JHipster][] page of the documentation for more information.
@@ -9,7 +9,11 @@ This application is configured for Service Discovery and Configuration with the 
 
 To start your application in the dev profile, simply run:
 
-    ./gradlew
+    ./gradlew bootRepackage -Pdev buildDocker # this will build all required containers
+
+    docker-compose -f src/main/docker/app.yml up -d
+    
+The application will listen on 9080 for requests
 
 
 For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
