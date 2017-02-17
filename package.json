@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "generator-jhipster-angular-ui": "0.0.2",
+    "generator-jhipster-webservice": "0.1.0",
+    "generator-jhipster-react": "0.0.0",
+    "generator-jhipster-ci": "1.0.0",
+    "generator-jhipster": "4.0.3"
+  }
+}
