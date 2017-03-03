@@ -12,14 +12,21 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
+import org.springframework.integration.annotation.InboundChannelAdapter;
+import org.springframework.integration.core.MessageSource;
+import org.springframework.messaging.support.GenericMessage;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 
 @ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
@@ -81,4 +88,11 @@ public class ConferencemanagerApp {
                 "Config Server: \t{}\n----------------------------------------------------------",
             configServerStatus == null ? "Not found or not setup for this application" : configServerStatus);
     }
+
+    @Bean
+    @InboundChannelAdapter(value = Source.OUTPUT)
+    public MessageSource<String> timerMessageSource() {
+        return () -> new GenericMessage<>(new SimpleDateFormat().format(new Date()));
+    }
+
 }
