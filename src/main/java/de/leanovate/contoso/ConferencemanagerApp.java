@@ -92,7 +92,7 @@ public class ConferencemanagerApp {
     @Bean
     @InboundChannelAdapter(value = Source.OUTPUT)
     public MessageSource<String> timerMessageSource() {
-        return () -> new GenericMessage<>(new SimpleDateFormat().format(new Date()));
+        return () -> new GenericMessage<>(String.format("%d", System.currentTimeMillis()));
     }
 
 }
