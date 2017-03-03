@@ -3,7 +3,7 @@ services:
     conferencemanager-app:
         image: conferencemanager
         external_links:
-            - conferencemanager-mariadb:mariadb
+            - mariadb:mariadb
             - kafka:kafka
             - zookeeper:zookeeper
             - jhipster-registry:registry
@@ -16,23 +16,8 @@ services:
             - SPRING_CLOUD_STREAM_KAFKA_BINDER_ZK_NODES=zookeeper
         ports:
             - 9080:9080
-    conferencemanager-mariadb:
-        extends:
-            file: mariadb.yml
-            service: conferencemanager-mariadb
-    kafka:
-        extends:
-            file: kafka.yml
-            service: kafka
-        environment:
-            - KAFKA_ADVERTISED_HOST_NAME=kafka
-    zookeeper:
-        extends:
-            file: kafka.yml
-            service: zookeeper
-    jhipster-registry:
-        extends:
-            file: jhipster-registry.yml
-            service: jhipster-registry
-        environment:
-            - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:./central-config/docker-config/
+
+networks:
+  default:
+    external:
+      name: contosomiddleware_default
