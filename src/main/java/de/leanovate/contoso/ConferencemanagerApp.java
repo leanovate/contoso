@@ -1,13 +1,16 @@
 package de.leanovate.contoso;
 
-import de.leanovate.contoso.config.DefaultProfileUtil;
-
-import io.github.jhipster.config.JHipsterConstants;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.Collection;
+import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.autoconfigure.*;
+import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
+import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -20,13 +23,8 @@ import org.springframework.integration.annotation.InboundChannelAdapter;
 import org.springframework.integration.core.MessageSource;
 import org.springframework.messaging.support.GenericMessage;
 
-import javax.annotation.PostConstruct;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
+import de.leanovate.contoso.config.DefaultProfileUtil;
+import io.github.jhipster.config.JHipsterConstants;
 
 @ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
@@ -92,7 +90,7 @@ public class ConferencemanagerApp {
     @Bean
     @InboundChannelAdapter(value = Source.OUTPUT)
     public MessageSource<String> timerMessageSource() {
-        return () -> new GenericMessage<>(String.format("%d", System.currentTimeMillis()));
+        return () -> new GenericMessage<>(String.format("Conference micro service: %d", System.currentTimeMillis()));
     }
 
 }
